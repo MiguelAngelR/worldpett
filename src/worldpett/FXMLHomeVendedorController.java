@@ -24,4 +24,10 @@ public class FXMLHomeVendedorController implements Initializable {
         // TODO
     }    
     
+    public void cerrarVentana(){
+        
+        System.exit(0);
+    }
+    
+    
 }
