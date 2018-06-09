@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="703.0" prefWidth="947.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="worldpett.FXMLHomeVendedorController">
+<AnchorPane id="AnchorPane" prefHeight="703.0" prefWidth="947.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldpett.FXMLHomeVendedorController">
    <children>
       <Pane prefHeight="52.0" prefWidth="947.0" style="-fx-background-color: #455A64;">
          <children>
@@ -35,11 +34,11 @@
       </Pane>
       <TableView fx:id="tbVenta" layoutX="395.0" layoutY="392.0" prefHeight="230.0" prefWidth="530.0">
         <columns>
-          <TableColumn prefWidth="62.0" text="Codigo" />
-          <TableColumn prefWidth="221.0" text="Nombre" />
-            <TableColumn prefWidth="87.0" text="Precio" />
-            <TableColumn prefWidth="70.0" text="Cantidad" />
-            <TableColumn prefWidth="89.0" text="Total" />
+          <TableColumn fx:id="tbCodigo" prefWidth="62.0" text="Codigo" />
+          <TableColumn fx:id="tbNombre" prefWidth="221.0" text="Nombre" />
+            <TableColumn fx:id="tbPrecio" prefWidth="87.0" text="Precio" />
+            <TableColumn fx:id="tbCantidad" prefWidth="70.0" text="Cantidad" />
+            <TableColumn fx:id="tbTotal" prefWidth="89.0" text="Total" />
         </columns>
       </TableView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="103.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
@@ -49,14 +48,14 @@
       </ImageView>
       <TableView fx:id="tbStock" layoutX="395.0" layoutY="150.0" prefHeight="230.0" prefWidth="530.0">
          <columns>
-            <TableColumn prefWidth="62.0" text="Codigo" />
-            <TableColumn prefWidth="221.0" text="Nombre" />
-            <TableColumn prefWidth="87.0" text="Precio" />
-            <TableColumn prefWidth="70.0" text="Cantidad" />
-            <TableColumn prefWidth="89.0" text="Total" />
+            <TableColumn fx:id="tbcCodigo" prefWidth="62.0" text="Codigo" />
+            <TableColumn fx:id="tbcNombre" prefWidth="221.0" text="Nombre" />
+            <TableColumn fx:id="tbcPrecio" prefWidth="87.0" text="Precio" />
+            <TableColumn fx:id="tbcCantidad" prefWidth="70.0" text="Cantidad" />
+            <TableColumn fx:id="tbcTotal" prefWidth="89.0" text="Total" />
          </columns>
       </TableView>
-      <TextField layoutX="395.0" layoutY="103.0" prefHeight="25.0" prefWidth="530.0" promptText="Producto">
+      <TextField fx:id="tfBuscar" layoutX="395.0" layoutY="103.0" prefHeight="25.0" prefWidth="530.0" promptText="Producto">
          <font>
             <Font size="14.0" />
          </font>
@@ -66,22 +65,22 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button layoutX="84.0" layoutY="299.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="176.0" style="-fx-background-color: #455A64;" text="Agregar Producto" textFill="WHITE">
+      <Button fx:id="btAgregar" layoutX="84.0" layoutY="299.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="176.0" style="-fx-background-color: #455A64;" text="Agregar Producto" textFill="WHITE">
          <font>
             <Font size="17.0" />
          </font>
       </Button>
-      <Button layoutX="84.0" layoutY="399.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="176.0" style="-fx-background-color: #455A64;" text="Quitar Producto" textFill="WHITE">
+      <Button fx:id="btQuitar" layoutX="84.0" layoutY="399.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="176.0" style="-fx-background-color: #455A64;" text="Quitar Producto" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="84.0" layoutY="499.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="176.0" style="-fx-background-color: #455A64;" text="Cobrar" textFill="WHITE">
+      <Button fx:id="btCobrar" layoutX="84.0" layoutY="499.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="176.0" style="-fx-background-color: #455A64;" text="Cobrar" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <TextField disable="true" layoutX="776.0" layoutY="635.0" prefHeight="50.0" prefWidth="149.0" promptText="Total">
+      <TextField fx:id="tfTotal" disable="true" layoutX="776.0" layoutY="635.0" prefHeight="50.0" prefWidth="149.0" promptText="Total">
          <font>
             <Font size="23.0" />
          </font>
