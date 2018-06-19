@@ -21,10 +21,8 @@ public class Worldpett extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-        stage.initStyle(StageStyle.UNDECORATED);
-        
         Scene scene = new Scene(root);
-        
+        //this.setLocationTo(null);
         stage.setScene(scene);
         stage.show();
     }
@@ -34,6 +32,10 @@ public class Worldpett extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+
+    private void setLocationTo(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
