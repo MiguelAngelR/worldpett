@@ -5,8 +5,14 @@
  */
 package worldpett;
 
+import base_datos.Conectar;
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,6 +34,7 @@ import javafx.stage.Stage;
  */
 public class FXMLDocumentController implements Initializable {
     
+    
     @FXML
     private Label label;
     @FXML
@@ -37,40 +44,86 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Text tLogin;
     
+    Conectar con;
+    
     @FXML
     private void handleButtonAction(ActionEvent event) {
       
     }
     
+       
     @FXML
-    private void handleClose(ActionEvent event) {
-        System.exit(0);
-    }
-    
-    
-    @FXML
-    private void entraHome(ActionEvent event) throws IOException{
-      
-        String usuario, pass;
-        
-        usuario = etUsuario.getText();
+    private void entraHome(ActionEvent event) throws IOException, SQLException{
+       
+       //con = new Conectar();
+       //Connection reg = con.getConnection();
+        int idUsuario;
+        String pass;
+        String cargo;
+        String codeUsuario = etUsuario.getText();
         pass = etPass.getText();
         
-        if(usuario.equals("Miguel") && pass.equals("123456")){
+        Conectar con = new Conectar();
+        Connection reg = con.getConnection();
+        Statement stm =  reg.createStatement();
+        ResultSet rs = stm.executeQuery("SELECT * FROM empleados WHERE codigo='"+codeUsuario+"' AND pass='"+pass+"'");
         
-            Parent home_page_parent = FXMLLoader.load(getClass().getResource("FXMLHomeVendedor.fxml"));
-            Scene home_page_scene = new Scene(home_page_parent);
-            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            app_stage.setScene(home_page_scene);
-            app_stage.show();
+        if(rs.next()){
+            cargo = rs.getString(5);
+            
+            switch(cargo){
+                case "Administrador":
+                
+                    Parent home_page_parent = FXMLLoader.load(getClass().getResource("FXMLHomeAdministrador.fxml"));
+                    Scene home_page_scene = new Scene(home_page_parent);
+                    Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    app_stage.setScene(home_page_scene);
+                    app_stage.show();
+                    
+                    rs.close();
+                    con.desconectar();
+                    break;
+                case "Capturista":
+                    Parent home_capturista = FXMLLoader.load(getClass().getResource("FXMLHomeCapturista.fxml"));
+                    Scene home_page_capturista = new Scene(home_capturista);
+                    Stage app_capturista = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    app_capturista.setScene(home_page_capturista);
+                    app_capturista.show();
+                   
+                    
+                    rs.close();
+                    con.desconectar();
+                    break;
+                    
+                case "Vendedor":
+                    Parent home_vendedor = FXMLLoader.load(getClass().getResource("FXMLHomeVendedor.fxml"));
+                    Scene home_page_vendedor = new Scene(home_vendedor);
+                    Stage app_vendedor = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    app_vendedor.setScene(home_page_vendedor);
+                    app_vendedor.show();
+                    
+                    rs.close();
+                    con.desconectar();
+                    break;
+                    
+                default:
+                    
+                    rs.close();
+                    con.desconectar();
+                    break;
+            
+            }
+           
         } else {
             tLogin.setVisible(true);
+            rs.close();
+            con.desconectar();
         }
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
     
 }

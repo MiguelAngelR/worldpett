@@ -29,7 +29,7 @@
                   <Font size="26.0" />
                </font>
             </Text>
-            <TextField id="etUsuario" fx:id="etUsuario" layoutX="39.0" layoutY="138.0" prefHeight="33.0" prefWidth="232.0" promptText="Usuario">
+            <TextField id="etUsuario" fx:id="etUsuario" layoutX="39.0" layoutY="138.0" prefHeight="33.0" prefWidth="232.0" promptText="Codigo de empleado">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -57,10 +57,5 @@
             <Image url="@images/logo.jpg" />
          </image>
       </ImageView>
-      <JFXButton buttonType="RAISED" layoutX="668.0" layoutY="2.0" onAction="#handleClose" onMouseClicked="#handleClose" ripplerFill="WHITE" text="X" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </JFXButton>
-   </children>
+    </children>
 </AnchorPane>
