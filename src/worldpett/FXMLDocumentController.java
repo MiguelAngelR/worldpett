@@ -69,7 +69,7 @@ public class FXMLDocumentController implements Initializable {
         ResultSet rs = stm.executeQuery("SELECT * FROM empleados WHERE codigo='"+codeUsuario+"' AND pass='"+pass+"'");
         
         if(rs.next()){
-            cargo = rs.getString(5);
+            cargo = rs.getString("cargo");
             
             switch(cargo){
                 case "Administrador":

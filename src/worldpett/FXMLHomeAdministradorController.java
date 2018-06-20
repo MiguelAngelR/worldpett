@@ -8,6 +8,7 @@ package worldpett;
 import base_datos.AlertBox;
 import base_datos.Conectar;
 import base_datos.Empleado;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -19,18 +20,27 @@ import java.util.ResourceBundle;
 import javafx.animation.Animation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable; 
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -60,6 +70,7 @@ public class FXMLHomeAdministradorController implements Initializable {
     ObservableList<Empleado> empleados;
     
     @FXML private Pane pnMenu;
+    @FXML private TabPane tabPane;
     
     /**
      * Initializes the controller class.
@@ -68,8 +79,30 @@ public class FXMLHomeAdministradorController implements Initializable {
         public void initialize(URL url, ResourceBundle rb) {
             cbCargo.setValue("Administrador");
             cbCargo.setItems(cargosList);
-        }    
+        }
+        
+        @FXML
+        public void cambiarTab(ActionEvent event) {
+            String origen = ((Button) event.getSource()).getText();
+            SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
 
+            int tabIndex = 0;
+            switch (origen) {
+            case "Productos":
+                tabIndex = 1;
+                break;
+            case "Proveedores":
+                tabIndex = 2;
+                break;
+            case "Ventas":
+                tabIndex = 3;
+                break;
+            case "Empleados":
+            default:
+                tabIndex = 0;
+            }
+            selectionModel.select(tabIndex);
+        }
             
         public void agregarEmpleado() throws SQLException{
           
@@ -114,6 +147,15 @@ public class FXMLHomeAdministradorController implements Initializable {
         public void eliminarEmpleado() throws SQLException{
                       
             
+        }
+        
+        @FXML
+        public void salir(ActionEvent event) throws IOException {
+            Parent home_page_parent = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+            Scene home_page_scene = new Scene(home_page_parent);
+            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            app_stage.setScene(home_page_scene);
+            app_stage.show();
         }
         
     }
