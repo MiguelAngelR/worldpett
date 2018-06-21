@@ -33,6 +33,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import util.AlertBox;
+import util.FXMLConfirmBoxController;
 import valueObject.Empleado;
 import worldpett.FXMLHomeAdministradorController;
 
@@ -69,6 +70,7 @@ public class FXMLEmpleadosController implements Initializable {
             EmpleadoDAO dao = new EmpleadoDAO();
             empleados = FXCollections.observableArrayList(dao.getEmpleados());
             tbEmpleados.setItems(empleados);
+            dao.desconectar();
         } catch (SQLException ex) {
             Logger.getLogger(FXMLHomeAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,9 +78,7 @@ public class FXMLEmpleadosController implements Initializable {
     
     @FXML
     public void modificarEmpleado(ActionEvent event) throws SQLException{
-        EmpleadoDAO dao = new EmpleadoDAO();
         Empleado selected = tbEmpleados.getSelectionModel().getSelectedItem();
-        String codigo = selected.getCodigo();
         
         ModificarEmpleadoFormController window = new ModificarEmpleadoFormController("Modificar empleado", selected);
         
@@ -89,11 +89,31 @@ public class FXMLEmpleadosController implements Initializable {
     public void eliminarEmpleado(ActionEvent event) throws SQLException{
         EmpleadoDAO dao = new EmpleadoDAO();
         Empleado selected = tbEmpleados.getSelectionModel().getSelectedItem();
-        String codigo = selected.getCodigo();
+        int id = selected.getId();
         
-        dao.deleteByCode(codigo);
-        
-        tbEmpleados.getItems().remove(selected);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/util/FXMLConfirmBox.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            FXMLConfirmBoxController controller = (FXMLConfirmBoxController) fxmlLoader.getController();
+            
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Eliminar empleado");
+            stage.setScene(new Scene(root1));  
+            
+            controller.setMessage("¿Seguro de que desea eliminar al empleado " + selected.getNombre() + "? \nEsta acción es permanente y no se puede deshacer.");
+            stage.showAndWait();
+            
+            if (controller.getConfirmed()) {
+                dao.deleteById(id);
+
+                tbEmpleados.getItems().remove(selected);
+                AlertBox.pantalla("Empleado eliminado", "El empleado " + selected.getNombre() + " ha \nsido eliminado con exito."); 
+                dao.desconectar();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLEmpleadosController.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
 
     @FXML

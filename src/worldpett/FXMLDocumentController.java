@@ -78,6 +78,7 @@ public class FXMLDocumentController implements Initializable {
                     Scene home_page_scene = new Scene(home_page_parent);
                     Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     app_stage.setScene(home_page_scene);
+                    app_stage.setTitle("Worldpet - Administrador");
                     app_stage.show();
                     
                     rs.close();
@@ -88,6 +89,7 @@ public class FXMLDocumentController implements Initializable {
                     Scene home_page_capturista = new Scene(home_capturista);
                     Stage app_capturista = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     app_capturista.setScene(home_page_capturista);
+                    app_capturista.setTitle("Worldpet - Capturista");
                     app_capturista.show();
                    
                     
@@ -100,6 +102,7 @@ public class FXMLDocumentController implements Initializable {
                     Scene home_page_vendedor = new Scene(home_vendedor);
                     Stage app_vendedor = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     app_vendedor.setScene(home_page_vendedor);
+                    app_vendedor.setTitle("Worldpet - Vendedor");
                     app_vendedor.show();
                     
                     rs.close();

@@ -22,6 +22,7 @@ public class Worldpett extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         Scene scene = new Scene(root);
         //this.setLocationTo(null);
+        stage.setTitle("Worldpet");
         stage.setScene(scene);
         stage.show();
     }
