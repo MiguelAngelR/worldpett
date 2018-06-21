@@ -5,9 +5,9 @@
  */
 package worldpett;
 
-import base_datos.AlertBox;
-import base_datos.Conectar;
-import base_datos.Producto;
+import util.AlertBox;
+import base_datos.BaseDataAccessObject;
+import base_datos.ProductoDAO;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -26,7 +26,7 @@ import javafx.scene.control.TextField;
  */
 public class FXMLHomeVendedorController implements Initializable {
 
-    private ObservableList <Producto> listaProductos;
+    private ObservableList <ProductoDAO> listaProductos;
     
     
     @FXML TextField tfTotal;
@@ -40,12 +40,12 @@ public class FXMLHomeVendedorController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Conectar con;
+        BaseDataAccessObject con;
         
         try {
-            con = new Conectar();
+            con = new BaseDataAccessObject();
             con.getConnection(); 
-            Producto.llenarTabla(con.getConnection(), listaProductos);
+            ProductoDAO.llenarTabla(con.getConnection(), listaProductos);
         
         } catch (SQLException ex) {
             Logger.getLogger(FXMLHomeVendedorController.class.getName()).log(Level.SEVERE, null, ex);

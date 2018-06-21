@@ -5,9 +5,9 @@
  */
 package worldpett;
 
-import base_datos.AlertBox;
-import base_datos.Conectar;
-import base_datos.Producto;
+import util.AlertBox;
+import base_datos.BaseDataAccessObject;
+import base_datos.ProductoDAO;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,7 +52,7 @@ public class FXMLHomeCapturistaController implements Initializable {
     
     public void agregarProducto() throws SQLException{
         
-        Producto producto = new Producto();
+        ProductoDAO producto = new ProductoDAO();
         compra = Integer.parseInt( tfCompra.getText());
         venta = Integer.parseInt(tfVenta.getText());
         cantidad = Integer.parseInt(tfCantidad.getText());

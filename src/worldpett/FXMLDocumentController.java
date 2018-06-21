@@ -5,7 +5,7 @@
  */
 package worldpett;
 
-import base_datos.Conectar;
+import base_datos.BaseDataAccessObject;
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.io.IOException;
 import java.net.URL;
@@ -44,7 +44,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Text tLogin;
     
-    Conectar con;
+    BaseDataAccessObject con;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -55,7 +55,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void entraHome(ActionEvent event) throws IOException, SQLException{
        
-       //con = new Conectar();
+       //con = new BaseDataAccessObject();
        //Connection reg = con.getConnection();
         int idUsuario;
         String pass;
@@ -63,7 +63,7 @@ public class FXMLDocumentController implements Initializable {
         String codeUsuario = etUsuario.getText();
         pass = etPass.getText();
         
-        Conectar con = new Conectar();
+        BaseDataAccessObject con = new BaseDataAccessObject();
         Connection reg = con.getConnection();
         Statement stm =  reg.createStatement();
         ResultSet rs = stm.executeQuery("SELECT * FROM empleados WHERE codigo='"+codeUsuario+"' AND pass='"+pass+"'");
