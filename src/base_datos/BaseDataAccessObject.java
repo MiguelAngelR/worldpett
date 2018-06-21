@@ -16,9 +16,9 @@ import java.util.logging.Logger;
  */
 public class BaseDataAccessObject {
     protected Connection connection = null;
-    private static final String driver  = "com.mysql.cj.jdbc.Driver";
-    private static final String usuario  = "root";
-    private static final String pass  = "";
+    private static final String driver  = System.getenv("MYSQL_DRIVER");
+    private static final String usuario  = System.getenv("MYSQL_USER");
+    private static final String pass  = System.getenv("MYSQL_PASS");
     private static final String url  = "jdbc:mysql://localhost/worldpet";
     
     public BaseDataAccessObject() throws SQLException {
