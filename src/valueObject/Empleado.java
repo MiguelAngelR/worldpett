@@ -5,6 +5,7 @@
  */
 package valueObject;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -12,21 +13,32 @@ import javafx.beans.property.SimpleStringProperty;
  * @author Saul
  */
 public class Empleado {
-    public SimpleStringProperty nombre;
-    public SimpleStringProperty cargo;
-    public SimpleStringProperty codigo;
+    private SimpleIntegerProperty id;
+    private SimpleStringProperty nombre;
+    private SimpleStringProperty cargo;
+    private SimpleStringProperty codigo;
     
     
     public Empleado() {
         this.cargo = new SimpleStringProperty();
         this.nombre = new SimpleStringProperty();
         this.codigo = new SimpleStringProperty();
+        this.id = new SimpleIntegerProperty();
     }
     
-    public Empleado(String nombre, String cargo, String codigo) {
+    public Empleado(String nombre, String cargo, String codigo, int id) {
         this.cargo = new SimpleStringProperty(cargo);
         this.nombre = new SimpleStringProperty(nombre);
         this.codigo = new SimpleStringProperty(codigo);
+        this.id = new SimpleIntegerProperty(id);
+    }
+    
+    public int getId() {
+        return id.get();
+    }
+    
+    public void setId(int id) {
+        this.id.set(id);
     }
     
     public String getCodigo() {

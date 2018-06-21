@@ -5,7 +5,6 @@
  */
 package base_datos;
 
-import util.AlertBox;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,7 +52,7 @@ public class EmpleadoDAO extends BaseDataAccessObject {
         ArrayList<Empleado> empleados = new ArrayList<Empleado>();
         ResultSet rs = null;
         
-        PreparedStatement prepareEmpleado = connection.prepareStatement("SELECT nombre, cargo, codigo from empleados");
+        PreparedStatement prepareEmpleado = connection.prepareStatement("SELECT id, nombre, cargo, codigo from empleados");
         rs = prepareEmpleado.executeQuery();
         
         while(rs.next()) {
@@ -62,6 +61,7 @@ public class EmpleadoDAO extends BaseDataAccessObject {
             empleado.setNombre(rs.getString("nombre"));
             empleado.setCargo(rs.getString("cargo"));
             empleado.setCodigo(rs.getString("codigo"));
+            empleado.setId(rs.getInt("id"));
             
             empleados.add(empleado);
         }
@@ -71,9 +71,9 @@ public class EmpleadoDAO extends BaseDataAccessObject {
         return empleados;
     }
     
-    public void deleteByCode(String code) throws SQLException {
-        PreparedStatement stmt = connection.prepareStatement("DELETE FROM empleados where codigo = ?");
-        stmt.setString(1, code);
+    public void deleteById(int id) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM empleados where id = ?");
+        stmt.setInt(1, id);
         stmt.executeUpdate();
         stmt.close();
     }
