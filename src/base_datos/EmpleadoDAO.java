@@ -5,77 +5,77 @@
  */
 package base_datos;
 
-import java.sql.Connection;
+import util.AlertBox;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-
-   
+import java.util.ArrayList;
+import valueObject.Empleado;
 
 /**
  *
  * @author Michael Liebheart
  */
-public class Empleado {
-    public SimpleIntegerProperty id        = new SimpleIntegerProperty();
-    public SimpleStringProperty nombre     = new SimpleStringProperty();
-    public SimpleStringProperty contrasena = new SimpleStringProperty();
-    public SimpleStringProperty cargo      = new SimpleStringProperty();
+public class EmpleadoDAO extends BaseDataAccessObject {
 
     
-    public Empleado(){
-        
-    }
-    
-    public Empleado(SimpleStringProperty nombre,SimpleStringProperty contrasena,SimpleStringProperty cargo){
-        this.cargo = cargo;
-        this.contrasena = contrasena;
-        this.nombre = nombre;
-        
-    }
-    public SimpleStringProperty getNombre() {
-        return nombre;
+    public EmpleadoDAO() throws SQLException {
+        super();
     }
 
-    public void setNombre(SimpleStringProperty nombre) {
-        this.nombre = nombre;
-    }
-
-    public SimpleStringProperty getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(SimpleStringProperty contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public SimpleStringProperty getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(SimpleStringProperty cargo) {
-        this.cargo = cargo;
-    }
-    
     public void loginEmpelado(int id){
 
     }
     
-    public void insertarEmpleado(Connection conn ,String codigo, String nombre, String pass, String cargo) throws SQLException{
+    public void insertarEmpleado(String codigo, String nombre, String pass, String cargo) throws SQLException {
+        PreparedStatement prepareEmpleado = connection.prepareStatement("INSERT INTO empleados(codigo,nombre,pass,cargo) VALUES (?,?,?,?)");
+        prepareEmpleado.setString(1,codigo);
+        prepareEmpleado.setString(2,nombre);
+        prepareEmpleado.setString(3,pass);
+        prepareEmpleado.setString(4,cargo);
+        prepareEmpleado.executeUpdate();
         
-                Statement stm = conn.createStatement();
-                PreparedStatement prepareEmpleado = conn.prepareStatement("INSERT INTO empleados(codigo,nombre,pass,cargo) VALUES (?,?,?,?)");
-                prepareEmpleado.setString(1,codigo);
-                prepareEmpleado.setString(2,nombre);
-                prepareEmpleado.setString(3,pass);
-                prepareEmpleado.setString(4,cargo);
-                prepareEmpleado.executeUpdate();
-                
-                AlertBox.pantalla("Usuario agregado", "Usuario "+nombre+" con cargo "+cargo+" \n y codigo de usuario ["+codigo+"] agregado con exito" );
-                
-                prepareEmpleado.close();
+        prepareEmpleado.close();
+    }
+    
+    public void modificarEmpleado(String codigo, String nombre, String pass, String cargo) throws SQLException {
+        PreparedStatement prepareEmpleado = connection.prepareStatement("UPDATE empleados SET nombre = ?, pass = ?, cargo = ? WHERE codigo = ?");
+        prepareEmpleado.setString(1,nombre);
+        prepareEmpleado.setString(2,pass);
+        prepareEmpleado.setString(3,cargo);
+        prepareEmpleado.setString(4,codigo);
+        prepareEmpleado.executeUpdate();
+        
+        prepareEmpleado.close();
+    }
+    
+    public ArrayList<Empleado> getEmpleados() throws SQLException {
+        ArrayList<Empleado> empleados = new ArrayList<Empleado>();
+        ResultSet rs = null;
+        
+        PreparedStatement prepareEmpleado = connection.prepareStatement("SELECT nombre, cargo, codigo from empleados");
+        rs = prepareEmpleado.executeQuery();
+        
+        while(rs.next()) {
+            Empleado empleado = new Empleado();
+            
+            empleado.setNombre(rs.getString("nombre"));
+            empleado.setCargo(rs.getString("cargo"));
+            empleado.setCodigo(rs.getString("codigo"));
+            
+            empleados.add(empleado);
+        }
+        
+        prepareEmpleado.close();
+        
+        return empleados;
+    }
+    
+    public void deleteByCode(String code) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM empleados where codigo = ?");
+        stmt.setString(1, code);
+        stmt.executeUpdate();
+        stmt.close();
     }
     
 }

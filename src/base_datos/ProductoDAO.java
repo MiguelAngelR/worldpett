@@ -5,6 +5,7 @@
  */
 package base_datos;
 
+import util.AlertBox;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ import javafx.collections.ObservableList;
  *
  * @author Michael Liebheart
  */
-public class Producto {
+public class ProductoDAO {
        private int id;
        private int compra;
        private int venta;
@@ -24,12 +25,12 @@ public class Producto {
        private String descripcion;
        private String proveedor;
 
-    public Producto() {
+    public ProductoDAO() {
     }
 
        
        
-    public Producto(int id,int compra, int venta, int cantidad, String descripcion, String proveedor) {
+    public ProductoDAO(int id,int compra, int venta, int cantidad, String descripcion, String proveedor) {
         this.id = id;
         this.compra = compra;
         this.venta = venta;
@@ -89,7 +90,7 @@ public class Producto {
     
     public void  agregarProducto(int compra, int venta, int cantidad, String descripcion, String proveedor) throws SQLException{
     
-        Conectar con = new Conectar();
+        BaseDataAccessObject con = new BaseDataAccessObject();
         Connection conn = con.getConnection();
         Statement stm = conn.createStatement();
         PreparedStatement preparaProducto = conn.prepareStatement("INSERT INTO productos(compra,venta,cantidad,descripcion,proveedor) VALUES (?,?,?,?,?)");
@@ -107,14 +108,13 @@ public class Producto {
        
     }
        
-    public static void llenarTabla(Connection connection , ObservableList<Producto> lista) throws SQLException{
+    public static void llenarTabla(Connection connection , ObservableList<ProductoDAO> lista) throws SQLException{
         Statement statement = connection.createStatement();
         ResultSet result = statement.executeQuery("SELECT * FROM productos");
         
         while(result.next()){
             
-            lista.add(
-                    new Producto(result.getInt(1),
+            lista.add(new ProductoDAO(result.getInt(1),
                                  result.getInt(2),
                                  result.getInt(3),
                                  result.getInt(4),
