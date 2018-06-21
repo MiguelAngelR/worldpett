@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package base_datos;
+package util;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -38,8 +38,6 @@ public class AlertBox {
         Scene scene = new Scene(layout,350,200);
         window.setScene(scene);
         window.showAndWait();
-         
-        
         
     }   
     
