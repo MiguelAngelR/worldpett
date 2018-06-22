@@ -46,6 +46,16 @@ public class FXMLHomeAdministradorController implements Initializable {
             Logger.getLogger(FXMLHomeAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @FXML
+    public void setProveedoresView() {
+        try {
+            AnchorPane newLoadedPane =  FXMLLoader.load(getClass().getResource("/partials/FXMLProveedores.fxml"));
+            pnMenu.getChildren().setAll(newLoadedPane);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLHomeAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @FXML
     public void salir(ActionEvent event) throws IOException {

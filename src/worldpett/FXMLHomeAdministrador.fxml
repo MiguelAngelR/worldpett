@@ -17,17 +17,17 @@
                   <Image url="@images/perfil.png" />
                </image>
             </ImageView>
-            <Button layoutX="31.0" layoutY="353.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="142.0" style="-fx-background-color: #1976D2;" text="Ventas" textFill="WHITE">
+            <Button layoutX="29.0" layoutY="345.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="142.0" style="-fx-background-color: #1976D2;" text="Ventas" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="31.0" layoutY="239.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="142.0" style="-fx-background-color: #1976D2;" text="Productos" textFill="WHITE">
+            <Button layoutX="29.0" layoutY="291.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="142.0" style="-fx-background-color: #1976D2;" text="Productos" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="31.0" layoutY="298.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="142.0" style="-fx-background-color: #1976D2;" text="Proveedores" textFill="WHITE">
+            <Button layoutX="29.0" layoutY="235.0" mnemonicParsing="false" onAction="#setProveedoresView" prefHeight="36.0" prefWidth="142.0" style="-fx-background-color: #1976D2;" text="Proveedores" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
