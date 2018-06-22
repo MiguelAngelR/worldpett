@@ -24,14 +24,14 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 DROP DATABASE IF EXISTS worldpet;
-CREATE DATABASE worldpet CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE worldpet;
 USE worldpet;
 --
 -- Estructura de tabla para la tabla `empleados`
 --
 
 CREATE TABLE `empleados` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `id` int(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `codigo` varchar(10) DEFAULT NULL,
   `nombre` varchar(50) DEFAULT NULL,
   `pass` varchar(50) DEFAULT NULL,
@@ -59,7 +59,7 @@ INSERT INTO `empleados` (`codigo`, `nombre`, `pass`, `cargo`) VALUES
 --
 
 CREATE TABLE `proveedores` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `id` int(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `rfc` varchar(16) DEFAULT NULL,
   `nombre` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -73,7 +73,7 @@ CREATE TABLE `proveedores` (
 --
 
 CREATE TABLE `productos` (
-  `id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `compra` int(10) DEFAULT NULL,
   `venta` int(10) DEFAULT NULL,
   `cantidad` int(10) DEFAULT NULL,
@@ -85,45 +85,12 @@ CREATE TABLE `productos` (
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `compra`, `venta`, `cantidad`, `descripcion`, `proveedor`) VALUES
-(1, 20, 40, 3, 'Alimento para gatos', NULL),
-(3, 30, 50, 3, 'Hueso para perro', NULL),
-(4, 12, 25, 30, 'Comida para gatos', NULL),
-(5, 20, 50, 10, 'Pelotas para gato', 'Mascota'),
-(6, 100, 150, 20, 'Rueda para Hamster', 'Mascota');
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `empleados`
---
-ALTER TABLE `empleados`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `productos`
---
-ALTER TABLE `productos`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `empleados`
---
-ALTER TABLE `empleados`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT de la tabla `productos`
---
-ALTER TABLE `productos`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-COMMIT;
+INSERT INTO `productos` (`compra`, `venta`, `cantidad`, `descripcion`, `proveedor`) VALUES
+(20, 40, 3, 'Alimento para gatos', NULL),
+(30, 50, 3, 'Hueso para perro', NULL),
+(12, 25, 30, 'Comida para gatos', NULL),
+(20, 50, 10, 'Pelotas para gato', 'Mascota'),
+(100, 150, 20, 'Rueda para Hamster', 'Mascota');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
