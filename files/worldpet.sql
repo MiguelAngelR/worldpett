@@ -23,13 +23,15 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-
+DROP DATABASE IF EXISTS worldpet;
+CREATE DATABASE worldpet CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE worldpet;
 --
 -- Estructura de tabla para la tabla `empleados`
 --
 
 CREATE TABLE `empleados` (
-  `id` int(5) NOT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(10) DEFAULT NULL,
   `nombre` varchar(50) DEFAULT NULL,
   `pass` varchar(50) DEFAULT NULL,
@@ -40,17 +42,31 @@ CREATE TABLE `empleados` (
 -- Volcado de datos para la tabla `empleados`
 --
 
-INSERT INTO `empleados` (`id`, `codigo`, `nombre`, `pass`, `cargo`) VALUES
-(1, '1', 'Miguel Angel Rios Alonso', 'GelanSohir33', 'Administrador'),
-(2, '2', 'Alberto Camacho Monryo', 'Alberto1234', 'Vendedor'),
-(3, '3', 'Avelina Fragoso Sanches', 'Avelina1234', 'Capturista'),
-(4, '4', 'Miguel Angel Rios Alonso', 'abc123', 'Administrador'),
-(5, '5', 'Alan ', '123456', 'Capturista'),
-(6, 'cv31001969', 'Jorge', '123456', 'Vendedor'),
-(7, 'cc31001969', 'Raul', '123456', 'Capturista'),
-(8, 'cv31001969', 'Jose', '123456', 'Vendedor');
+INSERT INTO `empleados` (`codigo`, `nombre`, `pass`, `cargo`) VALUES
+('1', 'Miguel Angel Rios Alonso', 'GelanSohir33', 'Administrador'),
+('2', 'Alberto Camacho Monryo', 'Alberto1234', 'Vendedor'),
+('3', 'Avelina Fragoso Sanches', 'Avelina1234', 'Capturista'),
+('4', 'Miguel Angel Rios Alonso', 'abc123', 'Administrador'),
+('5', 'Alan ', '123456', 'Capturista'),
+('cv31001969', 'Jorge', '123456', 'Vendedor'),
+('cc31001969', 'Raul', '123456', 'Capturista'),
+('cv31001969', 'Jose', '123456', 'Vendedor');
 
 -- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empleados`
+--
+
+CREATE TABLE `proveedores` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `rfc` varchar(16) DEFAULT NULL,
+  `nombre` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `empleados`
+--
 
 --
 -- Estructura de tabla para la tabla `productos`
