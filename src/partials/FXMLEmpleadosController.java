@@ -261,7 +261,6 @@ public class FXMLEmpleadosController implements Initializable {
                 EmpleadoDAO dao;
                 
                 String codeuser = empleado.getCodigo();
-                System.out.println(codeuser);
                 String pass = tfPass.getText();
                 String passConfirm = tfConfirmPass.getText();
                 String cargo = cbCargo.getValue().toString();
