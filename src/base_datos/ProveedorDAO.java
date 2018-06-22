@@ -45,20 +45,20 @@ public class ProveedorDAO extends BaseDataAccessObject {
         ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
         ResultSet rs = null;
         
-        PreparedStatement prepareEmpleado = connection.prepareStatement("SELECT id, nombre, rfc from empleados");
-        rs = prepareEmpleado.executeQuery();
+        PreparedStatement prepareProveedor = connection.prepareStatement("SELECT id, nombre, rfc from proveedores");
+        rs = prepareProveedor.executeQuery();
         
         while(rs.next()) {
             Proveedor proveedor = new Proveedor();
             
             proveedor.setNombre(rs.getString("nombre"));
-            proveedor.setRFC(rs.getString("rfc"));
+            proveedor.setRfc(rs.getString("rfc"));
             proveedor.setId(rs.getInt("id"));
             
             proveedores.add(proveedor);
         }
         
-        prepareEmpleado.close();
+        prepareProveedor.close();
         
         return proveedores;
     }
