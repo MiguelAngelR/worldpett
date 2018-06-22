@@ -46,11 +46,11 @@ public class Proveedor {
         this.nombre.set(nombre);
     }
     
-    public String getRFC() {
+    public String getRfc() {
         return rfc.get();
     }
 
-    public void setRFC(String rfc) {
+    public void setRfc(String rfc) {
         this.rfc.set(rfc);
     }
 }
